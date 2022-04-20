@@ -56,7 +56,15 @@ const dog = () =>
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
 //
 
-const joke = () => {};
+const joke = () =>
+  Promise.all([fetch("jokes", "question"), fetch("jokes", "answer")]).then(
+    ([call, response]) => {
+      return { question: call.joke, answer: response.answer };
+    }
+  );
+
+//this gives me the array created by Promises.all
+console.log([fetch("jokes", "question"), fetch("jokes", "answer")]);
 
 module.exports = {
   food,
